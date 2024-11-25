@@ -48,9 +48,9 @@ func VerifyEIP1559Header(config *params.ChainConfig, parent, header *types.Heade
 	}
 	// Verify the baseFee is correct based on the parent header.
 	expectedBaseFee := CalcBaseFee(config, parent, header.Time)
-	if header.BaseFee.Cmp(expectedBaseFee) != 0 && header.Number.Cmp(big.NewInt(3000000)) < 0  {
-		return fmt.Errorf("invalid baseFee: have %s, want %s, parentBaseFee %s, parentGasUsed %d",
-			header.BaseFee, expectedBaseFee, parent.BaseFee, parent.GasUsed)
+	if header.BaseFee.Cmp(expectedBaseFee) != 0  {
+		return fmt.Errorf("invalid baseFee: have %s, want %s, parentBaseFee %s, parentGasUsed %d ,header=%v",
+			header.BaseFee, expectedBaseFee, parent.BaseFee, parent.GasUsed,header.Number)
 	}
 	return nil
 }
